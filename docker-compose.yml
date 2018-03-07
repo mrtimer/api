@@ -1,0 +1,20 @@
+version: '3'
+services:
+    www:
+        build: docker/www/
+        container_name: mrtimer-www
+        volumes:
+            - .:/var/www/html
+        ports:
+            - 80:80
+        depends_on:
+            - db
+    db:
+        image: postgres:10.3
+        container_name: mrtimer-db
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_USER=mrtimer
+            - POSTGRES_PASSWORD=mrtimer
+            - POSTGRES_DB=mrtimer
