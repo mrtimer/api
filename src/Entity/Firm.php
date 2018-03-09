@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="firms")
  * @ORM\Entity(repositoryClass="App\Repository\FirmRepository")
  */
 class Firm
@@ -47,105 +48,66 @@ class Firm
      */
     private $updatedAt;
 
-    /**
-     * @return mixed
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return mixed
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param mixed $name
-     */
     public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return mixed
-     */
     public function getAvatar(): string
     {
         return $this->avatar;
     }
 
-    /**
-     * @param mixed $avatar
-     */
     public function setAvatar(string $avatar): void
     {
         $this->avatar = $avatar;
     }
 
-    /**
-     * @return mixed
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @param mixed $email
-     */
     public function setEmail(string $email): void
     {
         $this->email = $email;
     }
 
-    /**
-     * @return mixed
-     */
     public function getOwnerId(): int
     {
         return $this->ownerId;
     }
 
-    /**
-     * @param mixed $ownerId
-     */
     public function setOwnerId(int $ownerId): void
     {
         $this->ownerId = $ownerId;
     }
 
-    /**
-     * @return mixed
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param mixed $createdAt
-     */
     public function setCreatedAt(DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
-    /**
-     * @return mixed
-     */
     public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param mixed $updatedAt
-     */
     public function setUpdatedAt(DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
