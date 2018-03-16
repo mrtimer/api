@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * @ORM\Table(name="firms")
@@ -33,7 +35,11 @@ class Firm
      */
     private $email;
 
-    // TODO owner
+    /**
+    * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="ownerInFirm")
+    * @ORM\JoinColumn(name="owner_id")
+    */
+    private $owner;
 
     /**
      * @ORM\Column(type="datetime")
@@ -45,10 +51,16 @@ class Firm
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FirmUser", mappedBy="firm")
+     */
+    private $firmUser;
+
     public function __construct()
     {
         $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
+        $this->f = new ArrayCollection();
     }
 
     public function getId(): int
@@ -66,12 +78,12 @@ class Firm
         $this->name = $name;
     }
 
-    public function getAvatar(): string
+    public function getAvatar(): ?string
     {
         return $this->avatar;
     }
 
-    public function setAvatar(string $avatar): void
+    public function setAvatar(?string $avatar): void
     {
         $this->avatar = $avatar;
     }
@@ -84,6 +96,16 @@ class Firm
     public function setEmail(string $email): void
     {
         $this->email = $email;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(User $owner): void
+    {
+        $this->owner = $owner;
     }
 
     public function getCreatedAt(): DateTime
@@ -104,5 +126,10 @@ class Firm
     public function setUpdatedAt(DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    public function getFirmUser(): PersistentCollection
+    {
+        return $this->firmUser;
     }
 }

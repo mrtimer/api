@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -73,10 +75,21 @@ class User
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Firm", mappedBy="owner")
+     */
+    private $ownerInFirm;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FirmUser", mappedBy="user")
+     */
+    private $firmUser;
+
     public function __construct()
     {
         $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
+        $this->username = new ArrayCollection();
     }
 
     public function getId(): int
@@ -144,12 +157,12 @@ class User
         $this->registrationIP = $registrationIP;
     }
 
-    public function getAvatar(): string
+    public function getAvatar(): ?string
     {
         return $this->avatar;
     }
 
-    public function setAvatar(string $avatar): void
+    public function setAvatar(?string $avatar): void
     {
         $this->avatar = $avatar;
     }
@@ -192,5 +205,15 @@ class User
     public function setUpdatedAt(DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    public function getFirmWhichIsOwner(): ?Firm
+    {
+        return $this->ownerInFirm;
+    }
+
+    public function getFirmUser(): PersistentCollection
+    {
+        return $this->firmUser;
     }
 }
