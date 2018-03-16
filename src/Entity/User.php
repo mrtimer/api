@@ -49,7 +49,7 @@ class User
     private $registrationIP;
 
     /**
-     * @ORM\Column(type="string", length=30, unique=true)
+     * @ORM\Column(type="string", length=30, unique=true, nullable=true)
      */
     private $avatar;
 

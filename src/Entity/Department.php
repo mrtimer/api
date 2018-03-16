@@ -6,10 +6,10 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="firms")
- * @ORM\Entity(repositoryClass="App\Repository\FirmRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\DepartmentRepository")
+ * @ORM\Table(name="departments")
  */
-class Firm
+class Department
 {
     /**
      * @ORM\Id
@@ -19,7 +19,7 @@ class Firm
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string")
      */
     private $name;
 
@@ -27,13 +27,6 @@ class Firm
      * @ORM\Column(type="string", length=30, unique=true, nullable=true)
      */
     private $avatar;
-
-    /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     */
-    private $email;
-
-    // TODO owner
 
     /**
      * @ORM\Column(type="datetime")
@@ -74,16 +67,6 @@ class Firm
     public function setAvatar(string $avatar): void
     {
         $this->avatar = $avatar;
-    }
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
     }
 
     public function getCreatedAt(): DateTime
